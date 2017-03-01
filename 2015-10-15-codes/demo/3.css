@@ -1,0 +1,10 @@
+
+
+li:first-child,li{
+    border-bottom: 1px solid #dddddd;
+}
+span{
+    display: inline-block;
+    padding: 6px;
+    width: 120px;
+}

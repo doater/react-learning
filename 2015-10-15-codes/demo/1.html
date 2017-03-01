@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="./index.css" rel="stylesheet">
+    <script src="../build/react.min.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+</body>
+
+<script>
+
+</script>
+
+
+<script type="text/babel" >
+    var Sky = React.createClass({
+        render:function () {
+            var text = '那都不是事儿'
+            var a = 2
+            var b = 4
+            return (
+                    <div >
+                        sky
+                        <p>{a == 1 ? text : '雾霾'}</p>
+                        <div>
+                            {
+                                (function () {
+                                    if(b==3){
+                                        return 'b=3'
+                                    }else {
+                                        return 'b !==3'
+                                    }
+                                    return '那都不是事'
+                                })()
+                            }
+                        </div>
+                    </div>
+            )
+        }
+    })
+
+    var World = React.createClass({
+        render:function () {
+            var style={
+                width:'200px',
+                height:'200px',
+                border:'1px solid red'
+            }
+            return (
+                   <div style={style}>
+                       world
+                       <Sky/>
+                   </div>
+            )
+        }
+    })
+    var Hello = React.createClass({
+        render:function () {
+            return (
+                <div className="box">hello {this.props.name}
+                    <World/>
+                </div>
+            )
+        }
+    })
+
+    ReactDOM.render(<Hello name="aaa"/>,document.getElementById('root'))
+</script>
+</html>

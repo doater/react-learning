@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../build/react.min.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+
+</body>
+<script type="text/babel">
+    var arr = ['aaa','bbb','ccc','ddd']
+
+    var Child = React.createClass({
+        render:function () {
+            return (
+                    <div>{this.props.name}</div>
+            )
+        }
+    })
+
+    var App = React.createClass({
+        getInitialState(){
+            return {
+                aaa : 111,
+                bbb : 222
+            }
+        },
+
+        changeAaa:function (e) {
+            this.setState({
+                aaa:e.target.value
+            })
+        },
+        changeBbb:function (e) {
+             this.setState({
+                 bbb:e.target.value
+             })
+        },
+
+        render:function () {
+            var nodes = []
+            for(var i=0;i<arr.length;i++){
+                nodes.push(<li>{arr[i]}</li>)
+            }
+
+            return (
+                    <div>
+                        <ul>
+                            {nodes}
+                        </ul>
+                        <p>hello {this.props.name}</p>
+                        <p>this.props.name = {this.props.name}</p>
+                        <p>this.state.aaa = {this.state.aaa}</p>
+                        <p>app.state.bbb = {this.state.bbb}</p>
+                        <div>
+                            <p>
+                                <label>aaa</label>
+                                <input value={this.state.aaa} onChange={this.changeAaa}/>
+                            </p>
+
+                            <p>
+                                <label>bbb</label>
+                                <input value={this.state.bbb} onChange={this.changeBbb}/>
+                            </p>
+                        </div>
+                    </div>
+            )
+        }
+    })
+    ReactDOM.render(<App name='app'/>,document.getElementById('root'))
+</script>
+</html>

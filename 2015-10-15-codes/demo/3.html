@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../build/react.min.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+    <link href="./3.css" rel="stylesheet">
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    var a = ['1','2','3','4']
+    var b = a.map(function (n) {
+        return n*10
+    })
+    var Student = React.createClass({
+        render:function () {
+            var nodes = this.props.amao.map(function (student,i) {
+                return (
+                        <li key={i}>
+                            <span>{i}</span>
+                            <span>{student.name}</span>
+                            <span>{student.age}</span>
+                            <span>{student.sex}</span>
+                            <span>{student.singleDog ? '单身狗' : '恩爱狗'}</span>
+                        </li>
+                )
+            })
+            return (
+                    <ul>
+                        <li>
+                            <span>{'id'}</span>
+                            <span>姓名</span>
+                            <span>年龄</span>
+                            <span>性别</span>
+                            <span>情感状态</span>
+                        </li>
+                        {nodes}
+                    </ul>
+            )
+        }
+    })
+
+    var Action = React.createClass({
+        render:function () {
+            return (
+                    <div>
+                        <p>
+                            <label>name</label>
+                            <input />
+                        </p>
+                        <p>
+                            <label>age</label>
+                            <input />
+                        </p>
+                        <p>
+                            <label>sex</label>
+                            <input />
+                        </p>
+                        <p>
+                            <label>情感状态</label>
+                            <input />
+                        </p>
+                        <button>增加</button>
+                    </div>
+            )
+        }
+    })
+    var App = React.createClass({
+        getInitialState:function () {
+            return {
+                students: [
+                    {
+                        name : '嘿嘿哈',
+                        age : 100,
+                        sex : 'boy',
+                        singleDog:true
+                    },
+                    {
+                        name : 'ryan',
+                        age : 27,
+                        sex : 'boy',
+                        singleDog:true
+                    },
+                    {
+                        name : '梦里梦见梦中梦',
+                        age : 22,
+                        sex : 'boy',
+                        singleDog:true
+                    },
+                    {
+                        name : '風从東方來',
+                        age : 21,
+                        sex : 'gay',
+                        singleDog:true
+                    },
+                    {
+                        name : '望轻舟(王钦洲)',
+                        age : 23,
+                        sex : 'boy',
+                        singleDog:true
+                    },
+                    {
+                        name : 'ReadMe',
+                        age : 21,
+                        sex : 'boy',
+                        singleDog:true
+                    },
+                ],
+                name:'name',
+                age:18,
+                sex:'boy',
+                status:0
+            }
+        },
+        render:function () {
+            var nodes = this.state.students.map(function (name,i) {
+                return <li key={name+'-'+i}>{name}</li>
+            })
+            return (
+                    <div>
+                        <h3>动脑学院学生管理系统</h3>
+                        <Student amao={this.state.students}/>
+                        <div>
+                            <p>
+                                <label>name</label>
+                                <input value={this.state.name} onChange={this.changeName}/>
+                            </p>
+                            <p>
+                                <label>age</label>
+                                <input value={this.state.age} onChange={this.changeAge}/>
+                            </p>
+                            <p>
+                                <label >sex</label>
+                                <input value={this.state.sex} onChange={this.changeSex}/>
+                            </p>
+                            <p>
+                                <label>情感状态</label>
+                                <input value={this.state.status} onChange={this.changeStatus}/>
+                            </p>
+                            <button onClick={this.handleAdd}>增加</button>
+                        </div>
+                    </div>
+            )
+        },
+        changeName:function (e) {
+            this.setState({
+                name : e.target.value
+            })
+        },
+        changeAge:function (e) {
+            this.setState({
+                age : e.target.value
+            })
+        },
+        changeSex:function (e) {
+            this.setState({
+                sex : e.target.value
+            })
+        },
+        changeStatus:function (e) {
+            this.setState({
+                status : e.target.value
+            })
+        },
+        handleAdd:function () {
+            var students = this.state.students
+            var obj = {
+                name : this.state.name,
+                age : this.state.age,
+                sex : this.state.sex,
+                status: this.state.status
+            }
+            students.push(obj)
+            this.setState({
+                students:students
+            })
+        }
+    })
+    ReactDOM.render(<App/>,document.getElementById('root'))
+</script>
+</html>
